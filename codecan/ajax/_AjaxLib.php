@@ -20,7 +20,9 @@ class _AjaxLib
 	
 	function __construct($type=NULL)
 	{
-		$this->Ajax_KeyWords	=	new stdClass;
+		$keywords = file_get_contents('keywords.json');
+		
+		$this->Ajax_KeyWords	=	json_decode($keywords);
 		
 		$this->min_lib="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
 		if(!empty($type)){
@@ -29,17 +31,6 @@ class _AjaxLib
 			$this->_type="text/javascript";
 		}
 		
-		$this->Ajax_KeyWords->ajax_type = "type:";
-		
-		$this->Ajax_KeyWords->ajax_url	= "url:";
-		
-		$this->Ajax_KeyWords->ajax_data	= "data:";
-		
-		$this->Ajax_KeyWords->ajax_async= "async:";
-		
-		$this->Ajax_KeyWords->success	= "success:function(";
-		
-		$this->Ajax_KeyWords->error		= "error:function(";
 	}
 	
 	public function init()
@@ -52,8 +43,8 @@ class _AjaxLib
 	
 	public function open($src=NULL)
 	{
-		$script="<script";
-		$script .=' type="'.$this->_type;
+		$script=$this->Ajax_KeyWords->openscriopt;
+		$script .=$this->Ajax_KeyWords->scripttype.'"'.$this->_type;
 		if(!empty($src)){
 			$script .='" src="'.$src;
 		}
@@ -63,7 +54,7 @@ class _AjaxLib
 	
 	public function close()
 	{
-		$script_close="</script>";
+		$script_close=$this->Ajax_KeyWords->scriptclose;
 		echo $script_close;
 	}
 	

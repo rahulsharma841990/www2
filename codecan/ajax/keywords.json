@@ -1,0 +1,11 @@
+{
+  "ajax_type"	: "type:",
+  "ajax_url"	: "url:",
+  "ajax_data"	: "data:",
+  "ajax_async"	: "async:",
+  "success"		: "success:function(",
+  "error"		: "error:function(",
+  "openscriopt" : "<script",
+  "scripttype"	: " type=",
+  "scriptclose"	: "</script>"
+}
