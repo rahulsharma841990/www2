@@ -1,6 +1,6 @@
 <?php
 
-include_once "_iKeypass_Ajax.php";
+include_once "_AjaxLib.php";
 
 
 $ajax = new _iKeypass_Ajax();
