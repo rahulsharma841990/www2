@@ -3,7 +3,7 @@
 include_once "_AjaxLib.php";
 
 
-$ajax = new _iKeypass_Ajax();
+$ajax = new _AjaxLib();
 
 $fields['url']="http://google.com";
 $fields['num']="2123";

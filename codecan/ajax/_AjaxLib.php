@@ -1,6 +1,6 @@
 <?php
 
-class _iKeypass_Ajax
+class _AjaxLib
 {
 	private $min_lib;
 	
@@ -16,14 +16,30 @@ class _iKeypass_Ajax
 	
 	private $_error_param	=	"error";
 	
+	private $Ajax_KeyWords;
+	
 	function __construct($type=NULL)
 	{
+		$this->Ajax_KeyWords	=	new stdClass;
+		
 		$this->min_lib="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
 		if(!empty($type)){
 			$this->_type=$type;
 		}else{
 			$this->_type="text/javascript";
 		}
+		
+		$this->Ajax_KeyWords->ajax_type = "type:";
+		
+		$this->Ajax_KeyWords->ajax_url	= "url:";
+		
+		$this->Ajax_KeyWords->ajax_data	= "data:";
+		
+		$this->Ajax_KeyWords->ajax_async= "async:";
+		
+		$this->Ajax_KeyWords->success	= "success:function(";
+		
+		$this->Ajax_KeyWords->error		= "error:function(";
 	}
 	
 	public function init()
@@ -76,17 +92,17 @@ class _iKeypass_Ajax
 				}
 			}
 		}
-		$ajax_data  ='type:"'.$post_type.'",';
-		$ajax_data .='url:"'.$url.'",';
-		$ajax_data .='data:"'.$field.'",';
-		$ajax_data .='async:"'.$async.'",';
-		$ajax_data .='success:function(';
+		$ajax_data  =$this->Ajax_KeyWords->ajax_type.'"'.$post_type.'",';
+		$ajax_data .=$this->Ajax_KeyWords->ajax_url.'"'.$url.'",';
+		$ajax_data .=$this->Ajax_KeyWords->ajax_data.'"'.$field.'",';
+		$ajax_data .=$this->Ajax_KeyWords->ajax_async.'"'.$async.'",';
+		$ajax_data .=$this->Ajax_KeyWords->success;
 		$ajax_data .=$result_param;
 		$ajax_data .='){';
 		$ajax_data .=$succ_cont;
 		$ajax_data .='},';
 		if($error_cont!=NULL){
-			$ajax_data .='error:function(';
+			$ajax_data .=$this->Ajax_KeyWords->error;
 			$ajax_data .=$error_param;
 			$ajax_data .='){';
 			$ajax_data .=$error_cont;
